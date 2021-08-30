@@ -454,19 +454,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\elilt\\.nuget\\packages\\": {}
+    "C:\\Users\\fic\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI.csproj",
       "projectName": "Senai_Filmes_WebAPI",
-      "projectPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI.csproj",
-      "packagesPath": "C:\\Users\\elilt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\obj\\",
+      "projectPath": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI.csproj",
+      "packagesPath": "C:\\Users\\fic\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\Senai_Filmes_WebAPI\\Senai_Filmes_WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\elilt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fic\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

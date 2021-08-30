@@ -18,9 +18,14 @@ namespace Senai_Filmes_WebAPI.Repositories
         /// initial catalog = nome do bando de dados
         /// integrated security= faz a autenticação com o usuário do windows
         /// </summary>
+        
+        //Casa
         private string stringConexao = "Data Source =DESKTOP-TUQ4VJR\\SQLEXPRESS; initial catalog= CATALOGO; user id=sa; pwd=senai@132";
 
-        //
+        //Senai
+        //private string stringConexao = "Data Source =NOTE0113D3\\SQLEXPRESS; initial catalog= CATALOGO; user id=sa; pwd=Senai@132";
+
+        
 
         public void AtualizarIdUrl(int idGenero, GeneroDomain genero)
         {
@@ -46,13 +51,38 @@ namespace Senai_Filmes_WebAPI.Repositories
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = "INSERT INTO GENERO(nomeGenero) VALUES ('" + NovoGenero.nomeGenero + "')";
 
-                con.Open();
+
+                // Declara a query que será executada
+                // "INSERT INTO GENERO (nomeGenero) VALUES ('Joana D'Arc')"
+                // "INSERT INTO Generos (Nome) VALUES ('" + ')DROP TABLE Filmes-- + "')"
+                // string queryInsert = "INSERT INTO GENERO (nomeGenero) VALUES ('" + novoGenero.nomeGenero + "')";
+
+                // Não usar dessa forma, pois pode causar o efeito Joana D'Arc
+                // Além de permitir SQL Injection 
+                // Por exemplo
+                // "nomeGenero" : "')DROP TABLE FILME--";
+
+                // Ao tentar cadastrar um gênero com o comando acima, irá deletar a tabela FILME do banco de dados
+                // https://www.devmedia.com.br/sql-injection/6102
+
+               
+                //string queryInsert = "INSERT INTO GENERO(nomeGenero) VALUES ('" + NovoGenero.nomeGenero + "')";
+
+                string queryInsert = "INSERT INTO GENERO (nomeGenero) VALUES (@nomeGenero)";
+
 
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
+                    // Passa o valor do parâmetro @nomeGenero
+                    cmd.Parameters.AddWithValue("@nomeGenero", NovoGenero.nomeGenero);
+
+
+                    //Abre a conexão com o banco de dados
+                    con.Open();
+
+                    //Executa a query
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -63,7 +93,20 @@ namespace Senai_Filmes_WebAPI.Repositories
 
         public void Deletar(int IdGenero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryDelete = "DELETE FROM Genero WHERE idGenero = @id";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    cmd.Parameters.AddWithValue("@id", IdGenero);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
         }
 
 

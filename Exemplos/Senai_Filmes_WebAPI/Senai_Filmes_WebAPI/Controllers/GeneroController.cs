@@ -75,5 +75,21 @@ namespace Senai_Filmes_WebAPI.Controllers
             return StatusCode(201);
 
         }
+
+
+
+        /// <summary>
+        /// Deleta um genero existente
+        /// </summary>
+        /// <param name="id">id do genero que será deletado</param>
+        /// <returns>um status code 2014 - No Contentent</returns>
+        /// ex: http://localhost:5000/api/generos/10
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _GeneroRepository.Deletar(id);
+
+            return StatusCode(204);
+        }
     }
 }

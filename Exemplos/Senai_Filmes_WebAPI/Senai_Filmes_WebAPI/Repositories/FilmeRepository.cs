@@ -26,12 +26,18 @@ namespace Senai_Filmes_WebAPI.Repositories
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES ('" + NovoFilme.tituloFilme +"')";
+                //string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES ('" + NovoFilme.tituloFilme +"')";
 
-                con.Open();
+                string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES (@tituloFilme);
+
+                
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
+                    cmd.Parameters.AddWithValue("@tituloFilme", NovoFilme.tituloFilme);
+
+                    con.Open();
+
                     cmd.ExecuteNonQuery();
                 }
 
