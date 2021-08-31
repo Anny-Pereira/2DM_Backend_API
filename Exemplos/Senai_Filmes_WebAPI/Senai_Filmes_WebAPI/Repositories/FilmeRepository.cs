@@ -28,7 +28,7 @@ namespace Senai_Filmes_WebAPI.Repositories
             {
                 //string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES ('" + NovoFilme.tituloFilme +"')";
 
-                string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES (@tituloFilme);
+                string queryInsert = "INSERT INTO Filme(tituloFilme) VALUES (@tituloFilme)";
 
                 
 
@@ -46,7 +46,20 @@ namespace Senai_Filmes_WebAPI.Repositories
 
         public void Deletar(int idFilme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryDelete = "DELETE FROM Filme WHERE idFilme = @id";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    cmd.Parameters.AddWithValue("@id", idFilme);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
         }
 
         public List<FilmeDomain> ListarTodos()
