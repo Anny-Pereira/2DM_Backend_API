@@ -44,6 +44,48 @@ namespace Senai_Filmes_WebAPI.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            FilmeDomain filmeBusacdo = _FilmeRepository.BuscarId(id);
+
+            if (filmeBusacdo == null)
+            {
+                return NotFound("Nenhum filme encontrado!");
+            }
+
+            return Ok(filmeBusacdo);
+        }
+
+
+        [HttpPut("{id}")]
+        public IActionResult PutBody(int id, FilmeDomain filmeAtualizado)
+        {
+            FilmeDomain filmeBuscado = _FilmeRepository.BuscarId(id);
+
+            if (filmeBuscado == null)
+            {
+                return NotFound
+                    (new
+                    {
+                        mensagem = "Filme não encontrado!",
+                        erro = true
+                    });
+            }
+
+            try
+            {
+                _FilmeRepository.AtualizarIdUrl(id, filmeAtualizado);
+
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
+        }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

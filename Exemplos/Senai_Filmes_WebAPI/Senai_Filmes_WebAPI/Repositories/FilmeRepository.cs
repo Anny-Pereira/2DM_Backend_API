@@ -12,14 +12,62 @@ namespace Senai_Filmes_WebAPI.Repositories
     {
         private string stringConexao = "Data Source =DESKTOP-TUQ4VJR\\SQLEXPRESS; initial catalog= CATALOGO; user id=sa; pwd=senai@132";
 
-        public void AtualizarIdUrl(int idFilme, FilmeDomain filme)
+        public void AtualizarIdUrl(int idFilme, FilmeDomain filmeAtualizado)
         {
-            throw new NotImplementedException();
+
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdateUrl = "UPDATE Filme SET tituloFilme = @novoTituloFilme WHERE idFilme = @idFilmeAtualizado";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdateUrl, con))
+                {
+                    cmd.Parameters.AddWithValue("@novoTituloFilme", filmeAtualizado.tituloFilme);
+
+                    cmd.Parameters.AddWithValue("@idFilmeAtualizado", idFilme);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+
+
+                }
+            }
         }
 
         public FilmeDomain BuscarId(int idFilme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelectById = "SELECT idFilme, tituloFilme FROM Filme WHERE idFilme = @idFilme";
+
+                con.Open();
+
+                SqlDataReader reader;
+
+                using (SqlCommand cmd = new SqlCommand(querySelectById, con))
+                {
+                    cmd.Parameters.AddWithValue("@idFilme", idFilme);
+
+                    reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        FilmeDomain filmeBuscado = new FilmeDomain()
+                        {
+                            idFilme = Convert.ToInt32(reader["idFilme"]),
+
+                            tituloFilme = reader["tituloFilme"].ToString()
+
+                        };
+
+                        return filmeBuscado;
+
+                    }
+
+
+                    return null;
+                }
+            }
         }
 
         public void Cadastrar(FilmeDomain NovoFilme)
@@ -105,5 +153,5 @@ namespace Senai_Filmes_WebAPI.Repositories
         }
     }
 
-   
-}
+       
+    }
