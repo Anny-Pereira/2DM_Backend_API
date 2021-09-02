@@ -41,3 +41,8 @@ WHERE Aluguel.IdCliente = 2
 GO
 
 
+SELECT idVeiculo, placa, nomeModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdModelo = Modelo.IdModelo
+
+SELECT idVeiculo, idEmpresa , placa, nomeModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdModelo = Modelo.IdModelo   WHERE idVeiculo = 4
+
+SELECT idVeiculo, placa, nomeModelo, veiculo.idModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdModelo = Modelo.IdModelo

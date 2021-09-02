@@ -5,16 +5,18 @@ INSERT INTO Empresa (NomeEmpresa)
 VALUES ('Rental');
 GO
 
-INSERT INTO Cliente(NomeCliente, SobrenomeCliente)
-VALUES ('Paulo', 'Brandão'), ('Bianca', 'Santos'), ('José', 'Rocha');
+INSERT INTO Cliente(NomeCliente, SobrenomeCliente, DataNascimento)
+VALUES ('Paulo', 'Brandão', '1985-05-12'), ('Bianca', 'Santos', '1990-10-20'), ('José', 'Rocha', '1989-01-30');
 GO
 
-INSERT INTO Veiculo(IdEmpresa, Placa)
-VALUES (1, 'ABC 5588'), (1, 'CDD 1123'), (1, 'WDY 4576'), (1, 'TLU 2557'), (1, 'FFY 4662');
+
+INSERT INTO Marca(NomeMarca)
+VALUES ( 'Ford'), ('Fiat'), ( 'Nissan'), ('GM'), ('BMW');
 GO
 
-INSERT INTO Modelo(IdVeiculo, NomeModelo, AnoModelo)
-VALUES (4, 'Versa', 2019), (3, 'EcoSport', 2017), (5, 'Corsa', 2015), (1, 'Palio', 2015), (2, 'X1', 2020);
+
+INSERT INTO Modelo(IdMarca, NomeModelo, AnoModelo)
+VALUES (3, 'Versa', 2019), (1, 'EcoSport', 2017), (4, 'Corsa', 2015), (2, 'Palio', 2015), (5, 'X1', 2020);
 GO
 
 
@@ -24,11 +26,12 @@ WHERE IdModelo = 4;
 GO
 
 
-INSERT INTO Marca(IdModelo, NomeMarca)
-VALUES (2, 'Ford'), (4, 'Fiat'), (1, 'Nissan'), (3, 'GM'), (5, 'BMW');
+INSERT INTO Veiculo(IdEmpresa, IdModelo, Placa)
+VALUES (1, 4, 'ABC 5588'), (1, 5, 'CDD 1123'), (1, 2, 'WDY 4576'), (1, 1, 'TLU 2557'), (1, 3, 'FFY 4662');
 GO
 
 
+
 INSERT INTO Aluguel(IdVeiculo, IdCliente, DataAluguel, DataDevolucao)
-VALUES (3, 2,  '2021-02-15','2021-03-19' ), (5, 3, '2021-05-30','2021-06-30' ), (1, 1,  '2021-07-23', '2021-08-25'), (2, 2, '2021-08-02', '2021-10-27');
+VALUES (4, 2,  '2021-02-15','2021-03-19' ), (6, 3, '2021-05-30','2021-06-30' ), (2, 1,  '2021-07-23', '2021-08-25'), (3, 2, '2021-08-02', '2021-10-27');
 GO
