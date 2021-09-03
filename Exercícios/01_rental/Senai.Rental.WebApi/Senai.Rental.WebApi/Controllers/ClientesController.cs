@@ -82,6 +82,25 @@ namespace Senai.Rental.WebApi.Controllers
 
         }
 
+
+        //DESAFIO
+        //BuscarNomeCliente
+        [HttpGet("Buscar/{nomeCliente}")]
+        public IActionResult GetNome(string nomeCliente)
+        {
+            ClienteDomain clienteBuscado = _ClienteRepository.BuscarNome(nomeCliente);
+
+            if (clienteBuscado == null)
+            {
+                return NotFound("Nenhum cliente foi encontrado!");
+            }
+
+            return Ok(clienteBuscado);
+
+        }
+
+
+
         //AtualizarUrl
         [HttpPut("{id}")]
         public IActionResult Put(int id, ClienteDomain ClienteAtualizado)

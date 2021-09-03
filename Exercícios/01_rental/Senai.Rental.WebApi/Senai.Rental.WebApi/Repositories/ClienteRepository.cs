@@ -17,13 +17,15 @@ namespace Senai.Rental.WebApi.Repositories
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryAtualizar = "UPDATE Cliente SET nomeCliente = @novoNomeCliente, sobrenomeCliente = @novoSobrenomeCliente WHERE idCliente = @idClienteAtualizado";
+                string queryAtualizar = "UPDATE Cliente SET nomeCliente = @novoNomeCliente, sobrenomeCliente = @novoSobrenomeCliente, dataNascimento = @novaDataNascimento WHERE idCliente = @idClienteAtualizado";
 
                 using(SqlCommand cmd = new SqlCommand(queryAtualizar, con))
                 {
                     cmd.Parameters.AddWithValue("@novoNomeCliente", cliente.nomeCliente);
 
                     cmd.Parameters.AddWithValue("@novoSobrenomeCliente", cliente.sobrenomeCliente);
+
+                    cmd.Parameters.AddWithValue("@novaDataNascimento", cliente.dataNascimento);
 
                     cmd.Parameters.AddWithValue("@idClienteAtualizado", idCliente );
 
@@ -70,11 +72,13 @@ namespace Senai.Rental.WebApi.Repositories
             }
         }
 
+      
+
         public void Cadastrar(ClienteDomain NovoCliente)
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryCadastrar = "INSERT INTO Cliente (nomeCliente, sobrenomeCliente) VALUES (@nomeCliente, @sobrenomeCliente)";
+                string queryCadastrar = "INSERT INTO Cliente (nomeCliente, sobrenomeCliente, dataNascimento) VALUES (@nomeCliente, @sobrenomeCliente, @dataNascimento)";
 
                 using(SqlCommand cmd = new SqlCommand(queryCadastrar, con))
                 {
@@ -82,6 +86,8 @@ namespace Senai.Rental.WebApi.Repositories
                     cmd.Parameters.AddWithValue("@nomeCliente", NovoCliente.nomeCliente);
 
                     cmd.Parameters.AddWithValue("@sobrenomeCliente", NovoCliente.sobrenomeCliente);
+
+                    cmd.Parameters.AddWithValue("@dataNascimento", NovoCliente.dataNascimento);
 
                     con.Open();
 
@@ -114,7 +120,7 @@ namespace Senai.Rental.WebApi.Repositories
             
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryListar = "SELECT idCliente, nomeCliente, SobrenomeCliente FROM Cliente";
+                string queryListar = "SELECT idCliente, nomeCliente, SobrenomeCliente, dataNascimento FROM Cliente";
 
                 con.Open();
 
@@ -133,7 +139,9 @@ namespace Senai.Rental.WebApi.Repositories
 
                             nomeCliente = reader[1].ToString(),
 
-                            sobrenomeCliente = reader[2].ToString()
+                            sobrenomeCliente = reader[2].ToString(),
+
+                            dataNascimento = Convert.ToDateTime(reader[3].ToString())
                         };
 
 
@@ -145,6 +153,44 @@ namespace Senai.Rental.WebApi.Repositories
             }
 
             return listaClientes;
+        }
+
+
+        //DESAFIO
+        //BuscarNome
+        public ClienteDomain BuscarNome(string cliente)
+        {
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryBuscarId = "SELECT * FROM Cliente WHERE nomeCliente = @nomeCliente";
+
+                con.Open();
+
+                SqlDataReader reader;
+
+                using (SqlCommand cmd = new SqlCommand(queryBuscarId, con))
+                {
+                    cmd.Parameters.AddWithValue("@nomeCliente", cliente);
+
+                    reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        ClienteDomain clienteBuscado = new ClienteDomain()
+                        {
+                            idCliente = Convert.ToInt32(reader["idCliente"]),
+
+                            nomeCliente = reader["nomeCliente"].ToString(),
+
+                            sobrenomeCliente = reader["sobrenomeCliente"].ToString()
+                        };
+
+                        return clienteBuscado;
+                    }
+
+                    return null;
+                }
+            }
         }
     }
 }

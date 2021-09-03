@@ -52,6 +52,13 @@ namespace Senai.Rental.WebApi.Interfaces
         void AtualizarUrl(int idCliente, ClienteDomain cliente);
 
 
+        /// <summary>
+        /// Busca um determinado cliente pelo seu nome
+        /// </summary>
+        /// <param name="cliente">Objeto cliente que será buscado</param>
+        ClienteDomain BuscarNome(string cliente);
+
+
 
     }
 }

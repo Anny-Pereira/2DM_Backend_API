@@ -46,3 +46,27 @@ SELECT idVeiculo, placa, nomeModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdM
 SELECT idVeiculo, idEmpresa , placa, nomeModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdModelo = Modelo.IdModelo   WHERE idVeiculo = 4
 
 SELECT idVeiculo, placa, nomeModelo, veiculo.idModelo FROM Veiculo LEFT JOIN Modelo ON Veiculo.IdModelo = Modelo.IdModelo
+
+SELECT idAluguel, nomeModelo, nomeCliente, sobrenomeCliente, DataAluguel, DataDevolucao
+FROM Aluguel
+INNER JOIN Veiculo
+ON Aluguel.IdVeiculo = Veiculo.IdVeiculo
+INNER JOIN Modelo
+ON Veiculo.IdModelo = Modelo.IdModelo
+INNER JOIN Cliente
+ON Aluguel.IdCliente = Cliente.IdCliente
+
+SELECT FORMAT (getdate(), '15-02-2021') as date
+GO
+
+SELECT idCliente, nomeCliente, SobrenomeCliente, dataNascimento FROM Cliente
+
+
+SELECT * FROM Cliente WHERE nomeCliente = 'Bianca'
+
+UPDATE Aluguel SET idVeiculo = 6, 
+idCliente = 2, 
+dataAluguel = '2021-06-10' ,
+dataDevolucao = '2021-10-30'
+WHERE idAluguel = 10;
+GO
