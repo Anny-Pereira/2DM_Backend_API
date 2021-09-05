@@ -28,3 +28,7 @@ GO
 INSERT INTO Genero(NomeGenero)
 VALUES ('Aventura');
 GO
+
+INSERT INTO Usuario(email, senha, permissao)
+VALUES ('saulo@email.com', '123', 'Administrador'),('lucas@email.com','123','Comum');
+GO

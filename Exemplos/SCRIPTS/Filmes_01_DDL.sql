@@ -30,3 +30,11 @@ IdGenero  TINYINT FOREIGN KEY REFERENCES Genero(IdGenero),
 TituloFilme VARCHAR(70)
 );
 GO
+
+CREATE TABLE Usuario(
+idUsuario INT PRIMARY KEY IDENTITY,
+email VARCHAR(200) NOT NULL UNIQUE,
+senha VARCHAR (10) NOT NULL,
+permissao VARCHAR (50)
+);
+GO

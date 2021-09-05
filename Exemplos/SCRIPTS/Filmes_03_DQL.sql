@@ -7,6 +7,9 @@ GO
 SELECT * FROM Filme;
 GO
 
+SELECT * FROM Usuario;
+GO
+
 
 /*
 	ESTRUTURA DO JOIN
@@ -57,4 +60,12 @@ ON FILME.idGenero = GENERO.idGenero;
 SELECT idFilme, tituloFilme, ISNULL (Genero.NomeGenero, 'Sem gênero') nomeGenero
 FROM Filme LEFT JOIN Genero 
 ON FILME.idGenero = GENERO.idGenero;
+GO
+
+
+
+
+--Busca um usuário através do e-mail e senha
+SELECT * FROM Usuario
+WHERE email = 'saulo@email.com' AND senha = '123';
 GO
