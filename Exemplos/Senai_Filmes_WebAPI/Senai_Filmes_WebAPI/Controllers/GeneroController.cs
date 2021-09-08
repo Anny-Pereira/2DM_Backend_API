@@ -26,6 +26,8 @@ namespace Senai_Filmes_WebAPI.Controllers
 
     //Define que é um controlador de API
     [ApiController]
+
+    [Authorize]
     public class GeneroController : ControllerBase
     {
 
@@ -43,6 +45,7 @@ namespace Senai_Filmes_WebAPI.Controllers
             _GeneroRepository = new GeneroRepository();
         }
 
+        //[Authorize(Roles = "Administrador, Comum")]
         [HttpGet]
         //IActionResult = Resultado de uma ação
         //Get() = nome genérico
@@ -62,6 +65,7 @@ namespace Senai_Filmes_WebAPI.Controllers
         }
 
 
+        [Authorize(Roles = "Administrador, Comum")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -75,6 +79,7 @@ namespace Senai_Filmes_WebAPI.Controllers
             return Ok(generoBuscado);
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(GeneroDomain novoGenero)
         {
@@ -90,6 +95,7 @@ namespace Senai_Filmes_WebAPI.Controllers
         }
 
 
+        [Authorize(Roles = "Administrador")]
         [HttpPut("{id}")]
         public IActionResult PutUrl(int id, GeneroDomain generoAtualizado)
         {
@@ -118,7 +124,7 @@ namespace Senai_Filmes_WebAPI.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult PutBody(GeneroDomain generoAtualizado)
         {
@@ -166,6 +172,7 @@ namespace Senai_Filmes_WebAPI.Controllers
         /// <param name="id">id do genero que será deletado</param>
         /// <returns>um status code 2014 - No Contentent</returns>
         /// ex: http://localhost:5000/api/generos/10
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

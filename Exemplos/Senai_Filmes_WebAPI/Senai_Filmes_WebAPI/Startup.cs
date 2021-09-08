@@ -17,7 +17,44 @@ namespace Senai_Filmes_WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services
+                //Define a forma de autenticação
+                .AddAuthentication(options => {
+                    options.DefaultAuthenticateScheme = "JwtBearer";
+                    options.DefaultChallengeScheme = "JwtBearer";
+                })
+
+                //Define os parâmetros de validação do token
+                 .AddJwtBearer("JwtBearer", options => { 
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        //será validado o emissor do token
+                        ValidateIssuer = true,
+
+                        //será validado o destinatário do token
+                        ValidateAudience =  true,
+
+
+                        //será validado o tempo de vida do token
+                        ValidateLifetime = true,
+
+
+                        //Valida a chave de segurança
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao"));
+
+                     ClockSkew = TimeSpan.FromMinutes(30),
+
+                     //Define o nome do issuer, ou seja, quem gerou o token
+                     ValidIssuer = "Filmes.WebApi",
+
+                     //Define o nome do audience, ou seja, pra quem se destina a validação do token
+                     ValidAudience = "Filmes.WebApi"
+
+                 }
+                 });
         }
+       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,6 +65,13 @@ namespace Senai_Filmes_WebAPI
             }
 
             app.UseRouting();
+
+
+            //Habilita a autenticação
+            app.UseAuthentication();
+
+            //Habilita a autorização
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
