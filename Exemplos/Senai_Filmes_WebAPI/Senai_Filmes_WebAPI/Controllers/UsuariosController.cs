@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Senai_Filmes_WebAPI.Domains;
 using Senai_Filmes_WebAPI.Interfaces;
 using Senai_Filmes_WebAPI.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -36,13 +38,13 @@ namespace Senai_Filmes_WebAPI.Controllers
 
                 //Define os dados que serão fornecidos no token - payload
 
-                var claims = new[]
+                var minhasClaims = new[]
                 {
 
                     ///Baixar Pacote e ctrl + .
-                    new Claim(JwtRegistoredClaimNames.Email, usuarioBuscado.email),  //"email" : "saulo@email.com"
+                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.email),  //"email" : "saulo@email.com"
 
-                    new Claim(JwtRegistoredClaimNames.Jti, usuarioBuscado.idUsuario.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.idUsuario.ToString()),
 
                     new Claim(ClaimTypes.Role, usuarioBuscado.permissao),
 
@@ -63,7 +65,7 @@ namespace Senai_Filmes_WebAPI.Controllers
 
                         claims: minhasClaims,                    //Dados definidos acima
 
-                        expires: DateTime.Now.AddMinutes(30)     //Define o tempo de expiração
+                        expires: DateTime.Now.AddMinutes(30),     //Define o tempo de expiração
 
                         signingCredentials: creds                //Define creedencias do token
 
@@ -71,7 +73,7 @@ namespace Senai_Filmes_WebAPI.Controllers
 
                 return Ok(new
                 {
-                    token = new JwrSecurityTokenHandler().WriteToken(meuToken)
+                    token = new JwtSecurityTokenHandler().WriteToken(meuToken)
                 });
             }
 

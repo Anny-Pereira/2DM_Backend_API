@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,40 +20,41 @@ namespace Senai_Filmes_WebAPI
             services.AddControllers();
 
             services
-                //Define a forma de autenticação
-                .AddAuthentication(options => {
-                    options.DefaultAuthenticateScheme = "JwtBearer";
-                    options.DefaultChallengeScheme = "JwtBearer";
-                })
+            //Define a forma de autenticação
+            .AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
 
                 //Define os parâmetros de validação do token
-                 .AddJwtBearer("JwtBearer", options => { 
+            .AddJwtBearer("JwtBearer", options => {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         //será validado o emissor do token
                         ValidateIssuer = true,
 
-                        //será validado o destinatário do token
-                        ValidateAudience =  true,
 
+                        //será validado o destinatário do token
+                        ValidateAudience = true,
 
                         //será validado o tempo de vida do token
                         ValidateLifetime = true,
 
 
                         //Valida a chave de segurança
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao"));
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao")),
 
-                     ClockSkew = TimeSpan.FromMinutes(30),
+                        ClockSkew = TimeSpan.FromMinutes(30),
 
-                     //Define o nome do issuer, ou seja, quem gerou o token
-                     ValidIssuer = "Filmes.WebApi",
+                        //Define o nome do issuer, ou seja, quem gerou o token
+                        ValidIssuer = "Filmes.WebApi",
 
-                     //Define o nome do audience, ou seja, pra quem se destina a validação do token
-                     ValidAudience = "Filmes.WebApi"
+                        //Define o nome do audience, ou seja, pra quem se destina a validação do token
+                        ValidAudience = "Filmes.WebApi"
 
-                 }
-                 });
+
+                    };
+                });
         }
        
 
@@ -68,10 +70,10 @@ namespace Senai_Filmes_WebAPI
 
 
             //Habilita a autenticação
-            app.UseAuthentication();
+            app.UseAuthentication();            //401 - autenticação
 
             //Habilita a autorização
-            app.UseAuthorization();
+            app.UseAuthorization();             //403 - autorização
 
             app.UseEndpoints(endpoints =>
             {

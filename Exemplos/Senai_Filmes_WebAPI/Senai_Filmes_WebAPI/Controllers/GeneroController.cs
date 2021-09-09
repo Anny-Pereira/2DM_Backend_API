@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai_Filmes_WebAPI.Domains;
 using Senai_Filmes_WebAPI.Interfaces;
@@ -45,7 +46,7 @@ namespace Senai_Filmes_WebAPI.Controllers
             _GeneroRepository = new GeneroRepository();
         }
 
-        //[Authorize(Roles = "Administrador, Comum")]
+        [Authorize(Roles = "Administrador, Comum")]
         [HttpGet]
         //IActionResult = Resultado de uma ação
         //Get() = nome genérico
