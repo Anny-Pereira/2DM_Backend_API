@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Senai_ExemploInLock_webApi.Domains;
 using Senai_ExemploInLock_webApi.Interfaces;
 using Senai_ExemploInLock_webApi.Repositories;
 using System;
@@ -30,10 +31,63 @@ namespace Senai_ExemploInLock_webApi.Controllers
 
 
         //ListarTodos
+        /// <summary>
+        /// Lista todos os estúdios
+        /// </summary>
+        /// <returns>uma lista de estudios com status code 200</returns>
         [HttpGet]
         public IActionResult Listar()
         {
             return Ok(_estudioRepository.Listar());
+        }
+
+
+        //BuscarId
+        /// <summary>
+        /// Busca um estúdio através do seu id
+        /// </summary>
+        /// <param name="idestudio">id do estúdio que será buscado</param>
+        /// <returns>um estúdio encontrado com status code 200</returns>
+        [HttpGet("{idEstudio}")]
+        public IActionResult BuscarId(int idestudio)
+        {
+            return Ok(_estudioRepository.BuscarId(idestudio);
+        }
+
+
+        //Cadastrar
+        /// <summary>
+        /// Cadastra um estudio
+        /// </summary>
+        /// <param name="novoEstudio">objeto novoEstudio com as novas informações</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Cadastrar(Estudio novoEstudio)
+        {
+            //Chama o método Cadastrar enviando as informações de cadastro
+            _estudioRepository.Cadastrar(novoEstudio);
+
+            //retorna um status code
+            return StatusCode(201);
+        }
+
+
+
+        /// <summary>
+        /// atualiza um estudio existente
+        /// </summary>
+        /// <param name="idEstudio">id do estudio que será atualizado</param>
+        /// <param name="estudioAtualizado">objeto com as novas informações</param>
+        /// <returns></returns>
+        [HttpPut("{idEstudio}")]
+        public IActionResult Atualizar(int idEstudio, Estudio estudioAtualizado)
+        {
+            //Chama o método .Atualizar() enviando as novas informações
+            _estudioRepository.Atualizar(idEstudio, estudioAtualizado);
+
+
+            //Retorna um status code
+            return StatusCode(204);
         }
     }
 }

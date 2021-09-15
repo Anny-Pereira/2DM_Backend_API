@@ -17,17 +17,35 @@ namespace Senai_ExemploInLock_webApi.Repositories
 
         public void Atualizar(int idEstudio, Estudio estudioAtualizado)
         {
-            throw new NotImplementedException();
+            //Busca um estudio através de seu id 
+            Estudio estudioBuscado = ctx.Estudios.Find(idEstudio);
+
+            //Verifica se o novo nome do estudio foi informado
+            if (estudioAtualizado.NomeEstudio != null)
+            {
+                //se sim, altera o valor da propriedade NomeEstudio
+                estudioBuscado.NomeEstudio = estudioAtualizado.NomeEstudio;
+            }
+
+            //atualiza o estudio que foi buscado
+            ctx.Estudios.Update(estudioBuscado);
+
+            //salva as informações que serão gravadas no banco de dados
+            ctx.SaveChanges();
         }
 
         public Estudio BuscarId(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Estudios.FirstOrDefault(e => e.IdEstudio == id);
         }
 
         public void Cadastrar(Estudio novoEstudio)
         {
-            throw new NotImplementedException();
+            //Adiciona um novo estudio
+            ctx.Estudios.Add(novoEstudio);
+
+            //salva as informações que serão gravadas no banco de dados
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idEstudio)
