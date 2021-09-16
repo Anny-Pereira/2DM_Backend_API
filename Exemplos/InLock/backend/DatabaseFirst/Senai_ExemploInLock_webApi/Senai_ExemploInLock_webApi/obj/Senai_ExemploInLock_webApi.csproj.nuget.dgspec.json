@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj": {}
+    "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj": {
+    "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj",
+        "projectUniqueName": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj",
         "projectName": "Senai_ExemploInLock_webApi",
-        "projectPath": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj",
-        "packagesPath": "C:\\Users\\fic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fic\\Desktop\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\obj\\",
+        "projectPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi.csproj",
+        "packagesPath": "C:\\Users\\elilt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\elilt\\OneDrive\\Documentos\\SENAI\\2DM_Backend_API\\Exemplos\\InLock\\backend\\DatabaseFirst\\Senai_ExemploInLock_webApi\\Senai_ExemploInLock_webApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elilt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.10, )"

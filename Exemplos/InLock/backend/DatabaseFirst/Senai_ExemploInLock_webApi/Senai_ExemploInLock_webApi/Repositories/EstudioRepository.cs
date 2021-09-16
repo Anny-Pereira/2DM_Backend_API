@@ -1,4 +1,5 @@
-﻿using Senai_ExemploInLock_webApi.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai_ExemploInLock_webApi.Contexts;
 using Senai_ExemploInLock_webApi.Domains;
 using Senai_ExemploInLock_webApi.Interfaces;
 using System;
@@ -34,9 +35,9 @@ namespace Senai_ExemploInLock_webApi.Repositories
             ctx.SaveChanges();
         }
 
-        public Estudio BuscarId(int id)
+        public Estudio BuscarId(int idEstudio)
         {
-            return ctx.Estudios.FirstOrDefault(e => e.IdEstudio == id);
+            return ctx.Estudios.FirstOrDefault(e => e.IdEstudio == idEstudio);
         }
 
         public void Cadastrar(Estudio novoEstudio)
@@ -50,7 +51,14 @@ namespace Senai_ExemploInLock_webApi.Repositories
 
         public void Deletar(int idEstudio)
         {
-            throw new NotImplementedException();
+            //busca um estudio através de seu id
+            Estudio estudioBuscado = BuscarId(idEstudio);
+
+            //remove o estudio que foi buscado
+            ctx.Remove(estudioBuscado);
+
+            //salva as informações que serão gravadas no banco de dados
+            ctx.SaveChanges();
         }
 
         public List<Estudio> Listar()
@@ -61,7 +69,7 @@ namespace Senai_ExemploInLock_webApi.Repositories
 
         public List<Estudio> ListarJogos()
         {
-            throw new NotImplementedException();
+            return ctx.Estudios.Include(e => e.Jogos).ToList();
         }
     }
 }

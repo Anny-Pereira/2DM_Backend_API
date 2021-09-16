@@ -49,9 +49,9 @@ namespace Senai_ExemploInLock_webApi.Controllers
         /// <param name="idestudio">id do estúdio que será buscado</param>
         /// <returns>um estúdio encontrado com status code 200</returns>
         [HttpGet("{idEstudio}")]
-        public IActionResult BuscarId(int idestudio)
+        public IActionResult BuscarId(int idEstudio)
         {
-            return Ok(_estudioRepository.BuscarId(idestudio);
+            return Ok(_estudioRepository.BuscarId(idEstudio));
         }
 
 
@@ -73,6 +73,7 @@ namespace Senai_ExemploInLock_webApi.Controllers
 
 
 
+        //Atualizar
         /// <summary>
         /// atualiza um estudio existente
         /// </summary>
@@ -88,6 +89,31 @@ namespace Senai_ExemploInLock_webApi.Controllers
 
             //Retorna um status code
             return StatusCode(204);
+        }
+
+
+        //Deletar
+        /// <summary>
+        /// Deleta um estudio existente
+        /// </summary>
+        /// <param name="idEstudio">id do estudio que será deletado</param>
+        /// <returns>retorna um status code 204 - No Contente</returns>
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            //Chama o método .Deletar enviando o id do estudio como parametro
+            _estudioRepository.Deletar(id);
+
+
+            //Retorna um status code
+            return StatusCode(204);
+        }
+
+        //ListarJogos
+        [HttpGet("jogos")]
+        public IActionResult ListarJogos()
+        {
+            return Ok(_estudioRepository.ListarJogos());
         }
     }
 }
